@@ -150,6 +150,8 @@ let likedCats = [];
             if (counter) {
                 counter.textContent = `${currentIndex + 1} / ${catDeck.length}`;
             }
+
+            resetButtons();
         }
 
         function animateAndNext(direction, callback) {
@@ -184,6 +186,18 @@ let likedCats = [];
                 dislikeOverlay.style.opacity = 1;
                 card.style.transform = 'translateX(-500px) rotate(-40deg)';
             }
+        }
+
+        function resetButtons() {
+            const likeBtn = document.getElementById('like-btn');
+            const dislikeBtn = document.getElementById('dislike-btn');
+
+            if (likeBtn) likeBtn.classList.remove('active');
+            if (dislikeBtn) dislikeBtn.classList.remove('active');
+
+            // Also reset their inline styles
+            if (likeBtn) likeBtn.style.transform = "scale(1)";
+            if (dislikeBtn) dislikeBtn.style.transform = "scale(1)";
         }
 
         function handleLike() {
