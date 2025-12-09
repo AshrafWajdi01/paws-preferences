@@ -119,6 +119,7 @@ let likedCats = [];
             });
 
             loadCurrentCat();
+            resetCardState(); 
         }
 
         function loadCurrentCat() {
@@ -152,6 +153,20 @@ let likedCats = [];
             }
 
             resetButtons();
+        }
+
+        function resetCardState() {
+            const card = document.getElementById('swipe-card');
+            const likeOverlay = document.getElementById('like-overlay');
+            const dislikeOverlay = document.getElementById('dislike-overlay');
+
+            if (card) {
+                card.classList.remove('transition');
+                card.style.transform = 'translateX(0px) rotate(0deg)';
+            }
+
+            if (likeOverlay) likeOverlay.style.opacity = 0;
+            if (dislikeOverlay) dislikeOverlay.style.opacity = 0;
         }
 
         function animateAndNext(direction, callback) {
@@ -209,6 +224,7 @@ let likedCats = [];
                 likedCats.push(cat.url);
                 currentIndex++;
                 loadCurrentCat();
+                resetCardState(); 
             }, 250); 
         }
 
@@ -222,6 +238,7 @@ let likedCats = [];
                 dislikedCats.push(cat.url);
                 currentIndex++;
                 loadCurrentCat();
+                resetCardState(); 
             }, 250);
         }
 
