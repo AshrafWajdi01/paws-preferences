@@ -352,6 +352,12 @@ body {
     }
 }
 
+@media (hover: none) {
+    .action-btn:active {
+        transform: none !important;
+    }
+}
+
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .swipe-card img {

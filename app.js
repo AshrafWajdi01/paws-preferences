@@ -122,9 +122,20 @@ let likedCats = [];
         }
 
         function loadCurrentCat() {
-            if (currentIndex >= catDeck.length) {
+            if (currentIndex >= catDeck.length){
                 return showSummary();
             }
+
+            const cardContainer = document.getElementById('cat-card');
+            cardContainer.innerHTML = ''; // clear old content
+
+            const likeOverlay = document.createElement('div');
+            likeOverlay.className = 'swipe-overlay like';
+            likeOverlay.style.opacity = 0;
+
+            const dislikeOverlay = document.createElement('div');
+            dislikeOverlay.className = 'swipe-overlay dislike';
+            dislikeOverlay.style.opacity = 0;
 
             const card = document.getElementById('cat-card');
             const cat = catDeck[currentIndex];
@@ -213,22 +224,18 @@ let likedCats = [];
             const likeBtn = document.getElementById('like-btn');
             const dislikeBtn = document.getElementById('dislike-btn');
 
-            if (likeBtn) {
-                likeBtn.classList.remove('active');
-                likeBtn.style.transition = 'none';
-                likeBtn.style.transform = 'scale(1)';
-                likeBtn.offsetHeight; // force reflow
-                likeBtn.style.transition = '';
-            }
-
-            if (dislikeBtn) {
-                dislikeBtn.classList.remove('active');
-                dislikeBtn.style.transition = 'none';
-                dislikeBtn.style.transform = 'scale(1)';
-                dislikeBtn.offsetHeight; // force reflow
-                dislikeBtn.style.transition = '';
-            }
+            [likeBtn, dislikeBtn].forEach(btn => {
+                if (!btn) return;
+                btn.classList.remove('active');
+                btn.style.transition = 'none';
+                btn.style.transform = 'scale(1)';
+                // Force repaint
+                requestAnimationFrame(() => {
+                    btn.style.transition = '';
+                });
+            });
         }
+
 
         function handleLike() {
             const card = document.getElementById('swipe-card');
