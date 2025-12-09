@@ -119,7 +119,6 @@ let likedCats = [];
             });
 
             loadCurrentCat();
-            resetCardState(); 
         }
 
         function loadCurrentCat() {
