@@ -142,17 +142,24 @@ let likedCats = [];
             `;
 
             addSwipeListeners(document.getElementById('swipe-card'));
-            
-            document.getElementById('like-btn').addEventListener('click', handleLike);
-            document.getElementById('dislike-btn').addEventListener('click', handleDislike);
+
+            // Re-attach event listeners after DOM is recreated
+            const likeBtn = document.getElementById('like-btn');
+            const dislikeBtn = document.getElementById('dislike-btn');
+            likeBtn.addEventListener('click', handleLike);
+            dislikeBtn.addEventListener('click', handleDislike);
+
+            // Reset button styles **after a tiny delay** for Safari repaint
+            setTimeout(() => resetButtons(), 10);
 
             const counter = document.querySelector('.counter');
             if (counter) {
                 counter.textContent = `${currentIndex + 1} / ${catDeck.length}`;
             }
 
-            resetButtons();
+            resetCardState();
         }
+
 
         function resetCardState() {
             const card = document.getElementById('swipe-card');
@@ -232,7 +239,6 @@ let likedCats = [];
                 likedCats.push(cat.url);
                 currentIndex++;
                 loadCurrentCat();
-                resetCardState(); 
             }, 250); 
         }
 
@@ -246,7 +252,6 @@ let likedCats = [];
                 dislikedCats.push(cat.url);
                 currentIndex++;
                 loadCurrentCat();
-                resetCardState(); 
             }, 250);
         }
 
