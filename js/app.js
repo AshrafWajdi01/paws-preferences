@@ -115,7 +115,8 @@ let likedCats = [];
 
             const homeBtn = document.getElementById('home-btn');
             homeBtn.addEventListener('click', () => {
-                location.reload(); // or implement a proper category selection screen
+                window.location.href = window.location.pathname + '?t=' + Date.now();
+
             });
 
             loadCurrentCat();
@@ -329,7 +330,7 @@ let likedCats = [];
                 </div>
             `;
 
-            document.getElementById('restart-btn').addEventListener('click', () => location.reload());
+            document.getElementById('restart-btn').addEventListener('click', () => window.location.href = window.location.href.split('?')[0] + '?t=' + Date.now());
         }
 
 async function setButtonBackgrounds() {
