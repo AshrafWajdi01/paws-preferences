@@ -206,12 +206,21 @@ let likedCats = [];
             const likeBtn = document.getElementById('like-btn');
             const dislikeBtn = document.getElementById('dislike-btn');
 
-            if (likeBtn) likeBtn.classList.remove('active');
-            if (dislikeBtn) dislikeBtn.classList.remove('active');
+            if (likeBtn) {
+                likeBtn.classList.remove('active');
+                likeBtn.style.transition = 'none';
+                likeBtn.style.transform = 'scale(1)';
+                likeBtn.offsetHeight; // force reflow
+                likeBtn.style.transition = '';
+            }
 
-            // Also reset their inline styles
-            if (likeBtn) likeBtn.style.transform = "scale(1)";
-            if (dislikeBtn) dislikeBtn.style.transform = "scale(1)";
+            if (dislikeBtn) {
+                dislikeBtn.classList.remove('active');
+                dislikeBtn.style.transition = 'none';
+                dislikeBtn.style.transform = 'scale(1)';
+                dislikeBtn.offsetHeight; // force reflow
+                dislikeBtn.style.transition = '';
+            }
         }
 
         function handleLike() {
