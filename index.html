@@ -23,12 +23,14 @@
             </div>
         </div>
     </div>
-    <script src="app.js?t=<?= Date.now() ?>"></script>
     <script>
         const script = document.createElement("script");
         script.src = "app.js?t=" + Date.now();
+        script.onload = () => {
+            setButtonBackgrounds();
+        };
         document.body.appendChild(script);
-        setButtonBackgrounds();
     </script>
+
 </body>
 </html>
